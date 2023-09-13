@@ -1,0 +1,8 @@
+densenet:
+  model_path: models/densenet121.pth
+  classes_indexes_path: class_indexes/densnet_class_index.json
+
+vgg19:
+  model_path: models/vgg19_fine_tunned.h5
+  classes_indexes_path: class_indexes/brain_mri_class_indexes.json
+
