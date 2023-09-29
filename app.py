@@ -1,15 +1,16 @@
 import os
 import flask
 from flask import Flask, render_template, request, redirect
-from inference import  Inference
+from src.components.inference import  Inference
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-import nltk
+import nltk 
 from string import punctuation
 import re
 from nltk.corpus import stopwords
+from flask import jsonify
 
 nltk.download('stopwords')
 
@@ -45,10 +46,8 @@ def upload_file():
             return
         img_bytes = file.read()
         class_id, class_name = inferencing.predict_class(image=img_bytes)
-        return render_template('./result.html', class_id=class_id,
-                               class_name=class_name)
+        return jsonify(class_name=class_name)
     return render_template('./home.html')
-
 
 @app.route('/sentiment_analysis', methods=['POST'])
 def my_sentiment_analysis_post():
